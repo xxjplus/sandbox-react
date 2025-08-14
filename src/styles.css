@@ -51,9 +51,15 @@ ul {
 }
 
 body {
-  font-family: sans-serif;
-  margin: 20px;
-  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #abe59b, #a5e8c7, #9ceaf5);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 20px;
+  color: #333;
 }
 
 .square {
@@ -81,7 +87,13 @@ body {
   background: rgba(247, 46, 6, 0.266);
   border: 1px solid rgb(22, 211, 120);
   color: chocolate;
-  
+}
+
+.square-winner {
+  background-color: gold;
+  color: cornflowerblue;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
 }
 
 .board-row:after {
@@ -95,11 +107,20 @@ body {
   color: blue;
 }
 .status-winner {
-  color: gold;
-  font-size: larger;
-  font-weight: 200;
+  background-color: #d4edda;
+  color: #155724;
+  font-weight: bold;
+  font-size: 1.5rem;
+  animation: pulse 1s infinite;
   
 }
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+
 .game {
   display: flex;
   flex-direction: row;
@@ -107,4 +128,207 @@ body {
 
 .game-info {
   margin-left: 20px;
+}
+
+/* 整体布局和主题 */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  /*background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);*/
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 20px;
+  color: #333;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  max-width: 900px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.game-header {
+  padding: 25px;
+  background: #2c3e50;
+  color: white;
+}
+
+.game-title {
+  text-align: center;
+  margin: 0 0 20px 0;
+  font-size: 2.2rem;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* 棋盘区域 */
+.board-container {
+  background: #ecf0f1;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+.board-row {
+  display: flex;
+  justify-content: center;
+}
+
+/* 历史记录区域 */
+.game-info {
+  padding: 25px;
+  background: #f8f9fa;
+  border-top: 1px solid #eee;
+}
+
+.moves-title {
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 0;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #3498db;
+}
+
+.moves-list {
+  padding: 0;
+  list-style: none;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.move-item {
+  margin-bottom: 12px;
+  transition: transform 0.2s ease;
+}
+
+.move-item:hover {
+  transform: translateX(5px);
+}
+
+.move-button {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 14px 20px;
+  background: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 1.1rem;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.move-button:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: #3498db;
+  transform: scaleY(0);
+  transform-origin: bottom;
+  transition: transform 0.3s ease;
+}
+
+.move-button:hover:before {
+  transform: scaleY(1);
+}
+
+.move-button:hover {
+  background: #f0f7ff;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.move-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.move-icon {
+  font-size: 1.3rem;
+  margin-right: 15px;
+  width: 30px;
+  text-align: center;
+}
+
+.move-description {
+  flex-grow: 1;
+  font-weight: 500;
+}
+
+.current-move .move-button {
+  background: #e3f2fd;
+  border-left: 4px solid #3498db;
+  font-weight: 600;
+}
+
+.current-indicator {
+  color: #3498db;
+  font-size: 1.8rem;
+  margin-left: 10px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .game {
+    flex-direction: column;
+  }
+
+  .game-header, .game-info {
+    padding: 15px;
+  }
+
+  .square {
+    width: 50px;
+    height: 50px;
+    font-size: 28px;
+  }
+
+  .status {
+    font-size: 1.2rem;
+  }
+
+  .move-button {
+    padding: 12px 15px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .game-title {
+    font-size: 1.8rem;
+  }
+
+  .square {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    margin: 4px;
+  }
+
+  .status {
+    font-size: 1.1rem;
+    padding: 8px 12px;
+  }
+
+  .move-button {
+    padding: 10px 12px;
+  }
+
+  .move-icon {
+    margin-right: 10px;
+  }
 }
