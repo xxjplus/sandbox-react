@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'apk add --no-cache python3 make g++'
+                sh 'apk add python3 make g++'
                 sh 'npm install --verbose'
             }
         }
@@ -18,4 +18,21 @@ pipeline {
              }
         }
     }
+    post {
+            always {
+                echo 'always'
+            }
+            success {
+                echo 'success'
+            }
+            failure {
+                echo 'failure'
+            }
+            unstable {
+                echo 'unstable'
+            }
+            changed {
+                echo 'changed'
+            }
+        }
 }
